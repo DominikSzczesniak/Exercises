@@ -12,6 +12,15 @@ public class CustomList {
     private Element firstElement = null;
     int size = 0;
 
+    public void add(int number) {
+        if (firstElement == null) {
+            firstElement = new Element(number);
+        } else {
+            getLastElement().setNextElement(new Element(number));
+        }
+        size++;
+    }
+
     public void addAll(Integer[] elements) {
         for (int i = 0; i < elements.length; i++) {
             add(elements[i]);
@@ -30,25 +39,12 @@ public class CustomList {
         }
     }
 
-    public void add(int number) {
-        if (firstElement == null) {
-            firstElement = new Element(number);
-        } else {
-            getLastElement().setNextElement(new Element(number));
-        }
-        size++;
-    }
-
     private Element getLastElement() {
         Element lastElement = firstElement;
         while (lastElement.hasNext()) {
             lastElement = lastElement.getNextElement();
         }
         return lastElement;
-    }
-
-    public int size() {
-        return size;
     }
 
     public Optional<Integer> removeFIFO() {
@@ -64,7 +60,7 @@ public class CustomList {
         return Optional.of(elementToRemove.getValue());
     }
 
-    public Optional<Integer> removeLIFO() {  //TEGO NIE WIEM
+    public Optional<Integer> removeLIFO() {  // TEGO NIE WIEM !!!!!!!!!!!!!
         if (size() == 0) {
             return Optional.empty();
         }
@@ -133,6 +129,10 @@ public class CustomList {
         return Arrays.stream(elements)
                 .filter(element -> element > 5)
                 .toArray();
+    }
+
+    public int size() {
+        return size;
     }
 
     private static class Element {

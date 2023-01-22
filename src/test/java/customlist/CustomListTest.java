@@ -124,6 +124,26 @@ class CustomListTest {
         assertThat(tut.removeFIFO()).isEmpty();
     }
 
+        @Test
+    void should_remove_added_elements_in_order_LIFO() {
+        // when
+        tut.add(1);
+        tut.add(10);
+        tut.add(2);
+
+        // expect
+        assertThat(tut.removeLIFO()).get().isEqualTo(2);
+        assertThat(tut.size()).isEqualTo(2);
+
+        assertThat(tut.removeLIFO()).get().isEqualTo(10);
+        assertThat(tut.size()).isEqualTo(1);
+
+        assertThat(tut.removeLIFO()).get().isEqualTo(1);
+        assertThat(tut.size()).isEqualTo(0);
+
+        assertThat(tut.removeLIFO()).isEmpty();
+    }
+
     @Test
     void should_print_lowest_value_to_highest() {
         // when
@@ -168,24 +188,4 @@ class CustomListTest {
         // then
         assertThat(elements).contains(11, 10, 7);
     }
-
-//    @Test
-//    void should_remove_added_elements_in_order_LIFO() {
-//        // when
-//        tut.add(1);
-//        tut.add(10);
-//        tut.add(2);
-//
-//        // expect
-//        assertThat(tut.removeLIFO()).get().isEqualTo(2);
-//        assertThat(tut.size()).isEqualTo(2);
-//
-//        assertThat(tut.removeLIFO()).get().isEqualTo(10);
-//        assertThat(tut.size()).isEqualTo(1);
-//
-//        assertThat(tut.removeLIFO()).get().isEqualTo(1);
-//        assertThat(tut.size()).isEqualTo(0);
-//
-//        assertThat(tut.removeLIFO()).isEmpty();
-//    }
 }
