@@ -1,11 +1,9 @@
 package customlist;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 
 public class CustomList {
 
@@ -51,24 +49,19 @@ public class CustomList {
         if (size() == 0) {
             return Optional.empty();
         }
-        if (firstElement == null) {
-            return Optional.empty();
-        }
         Element elementToRemove = firstElement;
         firstElement = firstElement.nextElement;
         size--;
         return Optional.of(elementToRemove.getValue());
     }
 
-    public Optional<Integer> removeLIFO() {  // TEGO NIE WIEM !!!!!!!!!!!!!
+    public Optional<Integer> removeLIFO() {  // 1, 2, 10
         if (size() == 0) {
-            return Optional.empty();
-        }
-        if (firstElement == null) {
             return Optional.empty();
         }
         firstElement = getLastElement();
         Element elementToRemove = firstElement;
+        firstElement = firstElement.nextElement.nextElement;
         size--;
         return Optional.of(elementToRemove.getValue());
     }
@@ -84,6 +77,42 @@ public class CustomList {
     }
 
     public int[] getAllInOrderLIFO() {
+        int[] elements = addElementsDecrementing();
+        return elements;
+    }
+
+    public int[] sortLowestElementToHighest() {
+        int[] elements = addElementsIncrementing();
+        return Arrays.stream(elements).
+                sorted().
+                toArray();
+    }
+
+    public int[] highestElementToLowest() {
+        int[] elements = addElementsIncrementing();
+        return Arrays.stream(elements).boxed()
+                .sorted(Collections.reverseOrder())
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+
+    public int[] filterBy(Predicate<Integer> condition) {
+        int[] elements = new int[size];
+
+        return elements;
+    }
+
+    private int[] addElementsIncrementing() {
+        int[] elements = new int[size];
+        Element nextElement = firstElement;
+        for (int i = 0; i < size; i++) {
+            elements[i] = nextElement.value;
+            nextElement = nextElement.nextElement;
+        }
+        return elements;
+    }
+
+    private int[] addElementsDecrementing() {
         int[] elements = new int[size];
         Element nextElement = firstElement;
         for (int i = size - 1; i >= 0; i--) { // 3
@@ -91,44 +120,6 @@ public class CustomList {
             nextElement = nextElement.nextElement;
         }
         return elements;
-    }
-
-    public int[] lowestElementToHighest() {
-        int[] elements = new int[size];
-        Element nextElement = firstElement;
-        for (int i = 0; i < size; i++) {
-            elements[i] = nextElement.value;
-            nextElement = nextElement.nextElement;
-        }
-        return Arrays.stream(elements).
-                sorted().
-                toArray();
-    }
-
-    public int[] highestElementToLowest() {
-        int[] elements = new int[size];
-        Element nextElement = firstElement;
-        for (int i = 0; i < size; i++) {
-            elements[i] = nextElement.value;
-            nextElement = nextElement.nextElement;
-        }
-        return Arrays.stream(elements).boxed()
-                .sorted(Collections.reverseOrder())
-                .mapToInt(Integer::intValue)
-                .toArray();
-    }
-
-    public int[] higherThanFive() {
-        int[] elements = new int[size];
-        Element nextElement = firstElement;
-        for (int i = 0; i < size; i++) {
-            elements[i] = nextElement.value;
-            nextElement = nextElement.nextElement;
-        }
-
-        return Arrays.stream(elements)
-                .filter(element -> element > 5)
-                .toArray();
     }
 
     public int size() {

@@ -17,16 +17,14 @@ public class MathematicalOperation {
         }
 
         if (Objects.equals(lastElement, "+")) {
-            return convertedList.stream()
-                    .collect(Collectors.summingInt(number -> {
-                        int result = 0;
-                        result += number;
-                        return result;
-                    }));
+            return convertedList.stream().mapToInt(number -> {
+                int result = 0;
+                result += number;
+                return result;
+            }).sum();
         }
         else if (Objects.equals(lastElement, "-")){
-            return convertedList.stream()
-                    .collect(Collectors.summingInt(number -> -number));
+            return convertedList.stream().mapToInt(number -> -number).sum();
         }
         //else if (Objects.equals(lastElement, "*")){
 //            return convertedList.stream()
