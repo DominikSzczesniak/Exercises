@@ -17,7 +17,6 @@ public class CustomList {
         Element elementToRemove = firstElement;
         firstElement = firstElement.nextElement;
         size--;
-
         return Optional.of(elementToRemove.getValue());
     }
 
@@ -29,28 +28,27 @@ public class CustomList {
             elements[i] = nextElement.value;
             nextElement = nextElement.nextElement;
         }
-
         return elements;
     }
 
     public Optional<Integer> removeLIFO() {
         Element lastElement = firstElement;
-        int i = size - 1;
+        int sizeAfterRemove = size - 1;
+
         if (sizeIsZero()) {
             return Optional.empty();
         }
 
-        lastElement = getElementToRemoveLIFO(lastElement, i);
+        lastElement = getElementToRemoveLIFO(lastElement, sizeAfterRemove);
         Element elementToRemove = lastElement;
         size--;
-
         return Optional.of(elementToRemove.getValue());
     }
 
-    private Element getElementToRemoveLIFO(Element lastElement, int i) {
-        while ((lastElement.hasNext() && i > 0)) {
+    private Element getElementToRemoveLIFO(Element lastElement, int sizeAfterRemove) {
+        while ((lastElement.hasNext() && sizeAfterRemove > 0)) {
             lastElement = lastElement.nextElement;
-            i--;
+            sizeAfterRemove--;
         }
         return lastElement;
     }

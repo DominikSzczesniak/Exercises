@@ -134,14 +134,14 @@ class CustomListTest {
         tut.add(4);
         tut.add(5);
         tut.add(10);
-        tut.add(3);
+        tut.add(10);
         tut.add(1);
 
         // expect
         assertThat(tut.removeLIFO()).get().isEqualTo(1);
         assertThat(tut.size()).isEqualTo(4);
 
-        assertThat(tut.removeLIFO()).get().isEqualTo(3);
+        assertThat(tut.removeLIFO()).get().isEqualTo(10);
         assertThat(tut.size()).isEqualTo(3);
 
         assertThat(tut.removeLIFO()).get().isEqualTo(10);
