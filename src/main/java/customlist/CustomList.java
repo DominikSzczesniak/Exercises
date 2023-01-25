@@ -101,10 +101,6 @@ public class CustomList {
         return filteredElements;
     }
 
-    private static boolean elementMeetsCondition(Predicate<Integer> condition, Element nextElement) {
-        return condition.test(nextElement.value);
-    }
-
     public void add(int number) {
         if (firstElement == null) {
             firstElement = new Element(number);
@@ -132,6 +128,14 @@ public class CustomList {
         }
     }
 
+    public int size() {
+        return size;
+    }
+
+    private static boolean elementMeetsCondition(Predicate<Integer> condition, Element nextElement) {
+        return condition.test(nextElement.value);
+    }
+
     private Element getLastElement() {
         Element lastElement = firstElement;
 
@@ -140,10 +144,6 @@ public class CustomList {
         }
 
         return lastElement;
-    }
-
-    public int size() {
-        return size;
     }
 
     private boolean sizeIsZero(){
