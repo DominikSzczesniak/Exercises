@@ -1,7 +1,9 @@
 package customlist;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -126,22 +128,30 @@ class CustomListTest {
         assertThat(tut.removeFIFO()).isEmpty();
     }
 
-        @Test
+    @Test
     void should_remove_added_elements_in_order_LIFO() {
         // when
-        tut.add(1);
-        tut.add(2);
+        tut.add(4);
+        tut.add(5);
         tut.add(10);
+        tut.add(3);
+        tut.add(1);
 
         // expect
+        assertThat(tut.removeLIFO()).get().isEqualTo(1);
+        assertThat(tut.size()).isEqualTo(4);
+
+        assertThat(tut.removeLIFO()).get().isEqualTo(3);
+        assertThat(tut.size()).isEqualTo(3);
+
         assertThat(tut.removeLIFO()).get().isEqualTo(10);
         assertThat(tut.size()).isEqualTo(2);
 
-        assertThat(tut.removeLIFO()).get().isEqualTo(2);
-        //assertThat(tut.size()).isEqualTo(1);
+        assertThat(tut.removeLIFO()).get().isEqualTo(5);
+        assertThat(tut.size()).isEqualTo(1);
 
-        assertThat(tut.removeLIFO()).get().isEqualTo(1);
-        //assertThat(tut.size()).isEqualTo(0);
+        assertThat(tut.removeLIFO()).get().isEqualTo(4);
+        assertThat(tut.size()).isEqualTo(0);
 
         assertThat(tut.removeLIFO()).isEmpty();
     }
@@ -171,7 +181,7 @@ class CustomListTest {
         tut.add(5);
         tut.add(1);
 
-        int[] elements = tut.highestElementToLowest();
+        int[] elements = tut.sortHighestElementToLowest();
 
         // then
         assertThat(elements).containsExactly(11, 10, 5, 2, 1);
@@ -189,6 +199,6 @@ class CustomListTest {
         int[] elements = tut.filterBy((element) -> element > 5);
 
         // then
-        assertThat(elements).contains(11, 10, 7);
+        assertThat(elements).containsExactly(11, 10, 7);
     }
 }
