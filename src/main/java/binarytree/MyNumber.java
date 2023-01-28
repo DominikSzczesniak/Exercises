@@ -2,13 +2,21 @@ package binarytree;
 
 public class MyNumber {
 
-    int mainNumber;
+    int value;
     MyNumber leftNumber;
     MyNumber rightNumber;
 
     public MyNumber(int mainNumber) {
-        this.mainNumber = mainNumber;
+        this.value = mainNumber;
         this.leftNumber = null;
         this.rightNumber = null;
+    }
+
+    public boolean hasNextLeft() {
+        return leftNumber != null;
+    }
+
+    public boolean hasNextRight() {
+        return rightNumber != null;
     }
 }

@@ -3,77 +3,63 @@ package binarytree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree{
+public class Tree {
 
-    List<Integer> treeNumbers;
-    private int cursor = 0;
-    private int leftCursor = 0;
-    private int rightCursor = 0;
+    MyNumber startNumber = null;
+    int size = 0;
+    // 5, 3, 7, 2, 4, 6, 8
+    // 5, 3, 2, 4, 7, 6, 8
 
-    public Tree(List<Integer> treeNumbers) {
-        this.treeNumbers = treeNumbers;
-    }
+    public void add(int value) {
+        MyNumber newNumber = new MyNumber(value);
 
-    void add(int value) {
-        if (treeNumbers.size() == 0) {
-            treeNumbers.add(value);
-            cursor++;
-        } else if (value < treeNumbers.get(0) && value < treeNumbers.get(leftCursor)) {
-            treeNumbers.add(leftCursor + 1, value);
-            cursor++;
-            leftCursor++;
-        } else if (value < treeNumbers.get(0) && value > treeNumbers.get(leftCursor)) {
-            treeNumbers.add(leftCursor + 1, value);
-            cursor++;
-            //leftCursor++;
-        } else if (value < treeNumbers.get(0)) {
-            treeNumbers.add(leftCursor + 1, value);
-            cursor++;
-            leftCursor++;
-        } else if (value < treeNumbers.get(rightCursor) && value > treeNumbers.get(0)) {
-            treeNumbers.add(cursor - 1, value);
-            cursor++;
-        } else if (value > treeNumbers.get(0) && value < rightCursor) {
-            treeNumbers.add(cursor - 1, value);
-            cursor++;
-            rightCursor++;
+        if (startNumber == null) {
+            startNumber = newNumber;
+            size++;
         } else {
-            treeNumbers.add(cursor, value);
-            cursor++;
-            rightCursor++;
+            MyNumber numberInAction = startNumber;
+            MyNumber parent;
+
+            while (numberInAction != null) {
+                parent = numberInAction;
+
+                if (value < numberInAction.value) {
+                    numberInAction = numberInAction.leftNumber;
+                    if (numberInAction == null) {
+                        parent.leftNumber = newNumber;
+                    }
+                } else {
+                    numberInAction = numberInAction.rightNumber;
+                    if (numberInAction == null) {
+                        parent.rightNumber = newNumber;
+                    }
+                }
+            }
         }
     }
 
-    // 5, 3, 7, 2, 4, 6, 8
-    List<Integer> read() {
+    public List<Integer> read() {
         List<Integer> methodList = new ArrayList<>();
+        MyNumber numberInAction = startNumber;
+        MyNumber parent = numberInAction;
+        methodList.add(numberInAction.value);
 
 
+        while (parent.hasNextLeft() && numberInAction.value <= startNumber.value) {         // TO JEST LEWA STRONA DRZEWA
+            if (numberInAction.hasNextLeft() && numberInAction.hasNextRight())
+                parent = numberInAction;
+            if (numberInAction.hasNextLeft()) {
+                numberInAction = numberInAction.leftNumber;
+                methodList.add(numberInAction.value);
+                if (!numberInAction.hasNextLeft() && parent.rightNumber.value < startNumber.value){
+                    methodList.add(parent.rightNumber.value);
+                }
+            } else if (numberInAction.hasNextRight()) {
+                numberInAction = numberInAction.rightNumber;
+                methodList.add(numberInAction.value);
+            }
+        }
         return methodList;
-
-
-//        for (int i = 0; i < treeNumbers.size(); i++) {
-//            if (i == 0) {
-//                methodList.add(treeNumbers.get(i));
-//            } else if (treeNumbers.get(i) < treeNumbers.get(i - 1)) {  // liczba jest mniejsza od poprzedniej
-//                methodList.add(treeNumbers.get(i));
-//                for (int k = i ; k < treeNumbers.size(); k++) {  // cos tu przypisac do k moze innego
-//                    if (treeNumbers.get(k) < treeNumbers.get(i)) { // liczba jest mniejsza od i
-//                        methodList.add(treeNumbers.get(k));
-//                    }
-//                }
-//                // kolejna petla?
-//            } else methodList.add(treeNumbers.get(i));
-//        }
-//        return methodList;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Tree{" +
-                "treeNumbers=" + treeNumbers +
-                '}';
     }
 }
 
