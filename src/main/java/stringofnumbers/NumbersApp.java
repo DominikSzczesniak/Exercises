@@ -14,6 +14,7 @@ public class NumbersApp {
         System.out.println("Addition: " + mathematicalOperation.action("12,34,56;67,+"));
         System.out.println("Substraction: " + mathematicalOperation.action("14.14,36;2,-"));
         System.out.println("Multiplication: " + mathematicalOperation.action("3,4,2,*"));
+        System.out.println("Division: " + mathematicalOperation.action("30,3,5,/"));
 
     }
 }

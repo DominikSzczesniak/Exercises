@@ -22,16 +22,17 @@ public class Tree {
 
             while (numberInAction != null) {
                 parent = numberInAction;
-
                 if (value < numberInAction.value) {
                     numberInAction = numberInAction.leftNumber;
                     if (numberInAction == null) {
                         parent.leftNumber = newNumber;
+                        size++;
                     }
                 } else {
                     numberInAction = numberInAction.rightNumber;
                     if (numberInAction == null) {
                         parent.rightNumber = newNumber;
+                        size++;
                     }
                 }
             }
@@ -55,6 +56,44 @@ public class Tree {
                     methodList.add(parent.rightNumber.value);
                 }
             } else if (numberInAction.hasNextRight()) {
+                numberInAction = numberInAction.rightNumber;
+                methodList.add(numberInAction.value);
+            }
+        }
+        return methodList;
+    }
+
+    public List<Integer> readTwo() {
+        List<Integer> methodList = new ArrayList<>();
+        MyNumber numberInAction = startNumber;
+        MyNumber parent = numberInAction;
+        methodList.add(numberInAction.value);
+
+        while (parent.hasNextLeft() || parent.hasNextRight()) {
+            parent = numberInAction;
+
+            if (numberInAction.hasNextLeft()) {
+                numberInAction = numberInAction.leftNumber;
+                methodList.add(numberInAction.value);
+                if (!numberInAction.hasNextLeft()) {
+                    methodList.add(parent.rightNumber.value);
+                }
+            } else if (numberInAction.hasNextRight()) {
+                numberInAction = numberInAction.rightNumber;
+                methodList.add(numberInAction.value);
+            }
+        }
+
+        numberInAction = startNumber;
+        parent = numberInAction;
+
+        while (parent.hasNextRight()) {
+            parent = numberInAction;
+
+            if (numberInAction.value > startNumber.value && numberInAction.hasNextLeft()) {
+                methodList.add(numberInAction.leftNumber.value);
+            }
+            if (numberInAction.hasNextRight()) {
                 numberInAction = numberInAction.rightNumber;
                 methodList.add(numberInAction.value);
             }

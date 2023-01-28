@@ -22,17 +22,21 @@ public class MathematicalOperation {
                 result += number;
                 return result;
             }).sum();
-        }
-        else if (Objects.equals(lastElement, "-")){
+        } else if (Objects.equals(lastElement, "-")) {
             return convertedList.stream().mapToInt(number -> -number).sum();
+        } else if (Objects.equals(lastElement, "*")) {
+            int multiplicationResult = 1;
+            for (int number : convertedList) {
+                multiplicationResult *= number;
+            }
+            return multiplicationResult;
+        } else if (Objects.equals(lastElement, "/")) {
+            int divisionResult = convertedList.get(0) * convertedList.get(0);
+            for (int number : convertedList) {
+                divisionResult /= number;
+            }
+            return divisionResult;
         }
-        //else if (Objects.equals(lastElement, "*")){
-//            return convertedList.stream()
-//                    .mapToInt(number -> {
-//                        int product = 1;
-//                        product *= number;
-//                        return product;
-//                    });
-        else return 0;
+        return 0;
     }
 }
