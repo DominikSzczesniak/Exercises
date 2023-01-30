@@ -19,4 +19,5 @@ public class MyNumber {
     public boolean hasNextRight() {
         return rightNumber != null;
     }
+
 }

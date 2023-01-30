@@ -1,7 +1,6 @@
 package tictactoe;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -25,41 +24,53 @@ public class Board {
 
 
     public void playTheGame() {
-        Random rnd = new Random();  // jakos zadecydowac ktore startuja
         printBoard();
 
         while (!playerWon()) {
-            placeOOnBoard();
+            System.out.println("◯ turn");
+            int position = getIndex();
+            if (spotIsTaken(position)) {
+                do {
+                    System.out.println("Spot is already taken, choose different position.");
+                    position = getIndex();
+                } while (spotIsTaken(position));
+            }
+            placeOOnBoard(position);
             printBoard();
             if (playerWon()) {
-                System.out.println("Player that places ◯ has won");
                 return;
             }
-            placeXOnBoard();
+
+            System.out.println("X turn");
+            position = getIndex();
+            if (spotIsTaken(position)) {
+                do {
+                    System.out.println("Spot is already taken, choose different position.");
+                    position = getIndex();
+                } while (spotIsTaken(position));
+            }
+            placeXOnBoard(position);
             printBoard();
             if (playerWon()) {
                 return;
             }
-            // logika jak sie toczy gra
-
-
         }
 
     }
 
 
-    private int getXIndex() {
+    private int getIndex() {
         int index = scan.nextInt();
-        return index;
+        if (index < 0 || index > 8) {
+            do {
+                System.out.println("Position out of bounds, choose number between 0-8");
+                index = scan.nextInt();
+            } while (index < 0 || index > 8);
+        }
+            return index;
     }
 
-    private int getOIndex() {
-        int index = scan.nextInt();
-        return index;
-    }
-
-    private void placeXOnBoard() {
-        int index = getXIndex();
+    private void placeXOnBoard(int index) {
         switch (index) {
             case 0 -> board[0][0] = "X";
             case 1 -> board[0][1] = "X";
@@ -73,37 +84,71 @@ public class Board {
         }
     }
 
-    private void placeOOnBoard() {
-        int index = getOIndex();
+
+    private void placeOOnBoard(int index) {
         switch (index) {
-            case 0:
-                board[0][0] = "◯";
-                break;
-            case 1:
-                board[0][1] = "◯";
-                break;
-            case 2:
-                board[0][2] = "◯";
-                break;
-            case 3:
-                board[1][0] = "◯";
-                break;
-            case 4:
-                board[1][1] = "◯";
-                break;
-            case 5:
-                board[1][2] = "◯";
-                break;
-            case 6:
-                board[2][0] = "◯";
-                break;
-            case 7:
-                board[2][1] = "◯";
-                break;
-            case 8:
-                board[2][2] = "◯";
-                break;
+            case 0 -> board[0][0] = "◯";
+            case 1 -> board[0][1] = "◯";
+            case 2 -> board[0][2] = "◯";
+            case 3 -> board[1][0] = "◯";
+            case 4 -> board[1][1] = "◯";
+            case 5 -> board[1][2] = "◯";
+            case 6 -> board[2][0] = "◯";
+            case 7 -> board[2][1] = "◯";
+            case 8 -> board[2][2] = "◯";
         }
+    }
+
+    private boolean spotIsTaken(int index) {  // TO NAPRAWIC
+        String line;
+        switch (index) {
+            case 0 -> {
+                line = board[0][0];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 1 -> {
+                line = board[0][1];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 2 -> {
+                line = board[0][2];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 3 -> {
+                line = board[1][0];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 4 -> {
+                line = board[1][1];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 5 -> {
+                line = board[1][2];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 6 -> {
+                line = board[2][0];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 7 -> {
+                line = board[2][1];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+            case 8 -> {
+                line = board[2][2];
+                if ("X".equals(line) || "◯".equals(line))
+                    return true;
+            }
+        }
+        return false;
     }
 
     public void printBoard() {
@@ -123,14 +168,39 @@ public class Board {
                 "-------------------------------");
     }
 
-    private boolean playerWon() {
-        if (board[0][0].equals(board[0][1])) {
-            return true;
+    private void announceWinner() {
+        if (playerWon()) {
+
         }
 
 
+    }
+
+    private boolean playerWon() {
+        for (int i = 0; i < 8; i++) {
+            String line = " ";
+            switch (i) {
+                case 0 -> line = board[0][0] + board[0][1] + board[0][2];
+                case 1 -> line = board[1][0] + board[1][1] + board[1][2];
+                case 2 -> line = board[2][0] + board[2][1] + board[2][2];
+                case 3 -> line = board[0][0] + board[1][0] + board[2][0];
+                case 4 -> line = board[0][1] + board[1][1] + board[2][1];
+                case 5 -> line = board[0][2] + board[1][2] + board[2][2];
+                case 6 -> line = board[0][0] + board[1][1] + board[2][2];
+                case 7 -> line = board[0][2] + board[1][1] + board[2][0];
+
+            }
+            if ("XXX".equals(line)) {
+                System.out.println("Player X has won the game");
+                return true;
+            } else if ("◯◯◯".equals(line)) {
+                System.out.println("Player ◯ has won the game");
+                return true;
+            }
+        }
         return false;
     }
+
 
     @Override
     public boolean equals(Object o) {
