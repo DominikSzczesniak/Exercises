@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Board {
+
+    Placement placement = new Placement();
     String[][] board = {{"0", "1", "2"}, {"3", "4", "5"}, {"6", "7", "8"}};
     Scanner scan = new Scanner(System.in);
 
@@ -28,11 +30,11 @@ public class Board {
 
         while (!playerWon()) {
             System.out.println("◯ turn");
-            int position = getIndex();
+            int position = placement.getIndex();
             if (spotIsTaken(position)) {
                 do {
                     System.out.println("Spot is already taken, choose different position.");
-                    position = getIndex();
+                    position = placement.getIndex();
                 } while (spotIsTaken(position));
             }
             placeOOnBoard(position);
@@ -42,11 +44,11 @@ public class Board {
             }
 
             System.out.println("X turn");
-            position = getIndex();
+            position = placement.getIndex();
             if (spotIsTaken(position)) {
                 do {
                     System.out.println("Spot is already taken, choose different position.");
-                    position = getIndex();
+                    position = placement.getIndex();
                 } while (spotIsTaken(position));
             }
             placeXOnBoard(position);
@@ -59,7 +61,7 @@ public class Board {
     }
 
 
-    private int getIndex() {
+    private int asdIndex() {
         int index = scan.nextInt();
         if (index < 0 || index > 8) {
             do {
