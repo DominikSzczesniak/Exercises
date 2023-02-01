@@ -32,19 +32,19 @@ class TreeTest {
         tut.add(3);
         tut.add(7);
         tut.add(2);
+        tut.add(5);
         tut.add(4);
         tut.add(6);
         tut.add(8);
-        tut.add(5);
 
         // then
         assertThat(tut.read()).hasSize(7);
-        assertThat(tut.read()).containsExactly(5, 3, 2, 4, 7, 6, 8);
+        assertThat(tut.read()).containsOnlyOnce(5);
     }
 
     @Test
     void should_read_all_elements_in_binary_tree_order_one() {
-        // when
+        // given
         tut.add(5);
         tut.add(3);
         tut.add(7);
@@ -53,9 +53,10 @@ class TreeTest {
         tut.add(6);
         tut.add(8);
 
-        // then
+        // when
         List<Integer> elements = tut.read();
 
+        // then
         assertThat(elements).containsExactly(5, 3, 2, 4, 7, 6, 8);
     }
 
