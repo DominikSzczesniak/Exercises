@@ -5,9 +5,6 @@ import java.util.List;
 
 public class Tree {
 
-    // hide fields - private scope
-    // final
-    List<Integer> recursionList = new ArrayList<>(); // TODO: move to read() method
     private Node root = null;
 
     public void add(final int value) {
@@ -17,25 +14,22 @@ public class Tree {
             root = nodeToAdd;
             return;
         }
-       /*
-            what about same value (duplicates)
-         */
-        // TODO: refactor make code more describable
+        if (value != root.getValue()) {
+            Node placeToAdd = root;
+            Node parent;
 
-        Node placeToAdd = root;
-        Node parent;
-
-        while (placeToAdd != null) {
-            parent = placeToAdd;
-            if (value < placeToAdd.getValue()) {
-                placeToAdd = placeToAdd.getLeft();
-                if (placeToAdd == null) {
-                    parent.setLeft(nodeToAdd);
-                }
-            } else {
-                placeToAdd = placeToAdd.getRight();
-                if (placeToAdd == null) {
-                    parent.setRight(nodeToAdd);
+            while (placeToAdd != null) {
+                parent = placeToAdd;
+                if (value < placeToAdd.getValue()) {
+                    placeToAdd = placeToAdd.getLeft();
+                    if (placeToAdd == null) {
+                        parent.setLeft(nodeToAdd);
+                    }
+                } else {
+                    placeToAdd = placeToAdd.getRight();
+                    if (placeToAdd == null) {
+                        parent.setRight(nodeToAdd);
+                    }
                 }
             }
         }
@@ -59,15 +53,6 @@ public class Tree {
         if (node.hasNextRight()) {
             readNode(node.getRight(), result);
         }
-    }
-
-    private void addByRecursion(Node number) {
-        if (number == null) {
-            return;
-        }
-        recursionList.add(number.getValue());
-        addByRecursion(number.getLeft());
-        addByRecursion(number.getRight());
     }
 
 }
