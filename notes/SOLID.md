@@ -14,7 +14,8 @@ If class A is a subtype of class B, we should be able to replace B with A withou
 
 #### 4. I - Interface segregation ####
 Larger interfaces should be split into smaller ones. By doing so we can ensure that implementing classes only need 
-to be concerned about the method that are of interest to them.
+to be concerned about the method that are of interest to them.  
+Exeample: interface contains area and value methods, but circle or rectangle can't have value.
 # ![img.png](img.png) --------------> ![img_1.png](img_1.png)
 
 #### 5. D - Dependency inversion ####
