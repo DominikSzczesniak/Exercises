@@ -1,7 +1,6 @@
 package customlist;
 
 import java.util.*;
-import java.util.List;
 import java.util.function.Predicate;
 
 public class CustomList {
@@ -9,8 +8,58 @@ public class CustomList {
     private Element firstElement = null;
     private int size = 0;
 
+    public void add(final int number) {
+        final Element newElement = new Element(number);
+        getLastElement().ifPresentOrElse(
+                lastElement -> lastElement.setNextElement(newElement),
+                () -> firstElement = newElement);
+        size++;
+    }
+
+    private Optional<Element> getLastElement() {
+        if (firstElement == null) {
+            return Optional.empty();
+        }
+        Element lastElement = firstElement;
+
+        while (lastElement.hasNext()) {
+            lastElement = lastElement.nextElement;
+        }
+
+        return Optional.of(lastElement);
+    }
+
+    public void addAll(Integer[] elements) {
+        for (Integer element : elements) {
+            add(element);
+        }
+    }
+
+    public void addAll(List<Integer> elements) {
+        for (Integer element : elements) {
+            add(element);
+        }
+    }
+
+    public void addAll(int... elements) {
+        for (int element : elements) {
+            add(element);
+        }
+    }
+
+    public int[] getAllInOrderFIFO() {
+        final int[] elements = new int[size];
+        Element element = firstElement;
+
+        for (int i = 0; i < size; i++) {
+            elements[i] = element.value;
+            element = element.nextElement;
+        }
+        return elements;
+    }
+
     public Optional<Integer> removeFIFO() {
-        if (sizeIsZero()) {
+        if (size == 0) {
             return Optional.empty();
         }
 
@@ -20,11 +69,11 @@ public class CustomList {
         return Optional.of(elementToRemove.getValue());
     }
 
-    public int[] getAllInOrderFIFO() {
-        int[] elements = new int[size];
+    public int[] getAllInOrderLIFO() {
+        final int[] elements = new int[size];
         Element nextElement = firstElement;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = size - 1; i >= 0; i--) {
             elements[i] = nextElement.value;
             nextElement = nextElement.nextElement;
         }
@@ -32,41 +81,34 @@ public class CustomList {
     }
 
     public Optional<Integer> removeLIFO() {
-        Element lastElement = firstElement;
-        int sizeAfterRemove = size - 1;
-
-        if (sizeIsZero()) {
+        if (size() == 0) {
             return Optional.empty();
         }
-
-        lastElement = getElementToRemoveLIFO(lastElement, sizeAfterRemove);
-        Element elementToRemove = lastElement;
+        if (size() == 1) {
+            int value = firstElement.value;
+            firstElement = null;
+            size--;
+            return Optional.of(value);
+        }
+        Element preLastElement = findPreLastElement();
+        Element lastElement = preLastElement.nextElement;
+        preLastElement.setNextElement(null);
         size--;
-        return Optional.of(elementToRemove.getValue());
+        return Optional.of(lastElement.value);
     }
 
-    private Element getElementToRemoveLIFO(Element lastElement, int sizeAfterRemove) {
-        while ((lastElement.hasNext() && sizeAfterRemove > 0)) {
+    private Element findPreLastElement() {
+        Element preLastElement = firstElement;
+        Element lastElement = firstElement.nextElement;
+        while (lastElement.hasNext()) {
+            preLastElement = lastElement;
             lastElement = lastElement.nextElement;
-            sizeAfterRemove--;
         }
-        return lastElement;
-    }
-
-    public int[] getAllInOrderLIFO() {
-        int[] elements = new int[size];
-        Element nextElement = firstElement;
-
-        for (int i = size - 1; i >= 0; i--) {
-            elements[i] = nextElement.value;
-            nextElement = nextElement.nextElement;
-        }
-
-        return elements;
+        return preLastElement;
     }
 
     public int[] sortLowestElementToHighest() {
-        int[] elements = getAllInOrderFIFO();
+        final int[] elements = getAllInOrderFIFO();
 
         return Arrays.stream(elements).
                 sorted().
@@ -74,7 +116,7 @@ public class CustomList {
     }
 
     public int[] sortHighestElementToLowest() {
-        int[] elements = getAllInOrderFIFO();
+        final int[] elements = getAllInOrderFIFO();
 
         return Arrays.stream(elements).boxed()
                 .sorted(Collections.reverseOrder())
@@ -82,13 +124,13 @@ public class CustomList {
                 .toArray();
     }
 
-    public int[] filterBy(Predicate<Integer> condition) {
-        int[] elements = new int[size];
+    public int[] filterBy(final Predicate<Integer> criteria) {
+        final int[] elements = new int[size];
         Element nextElement = firstElement;
         int numberOfElementsAfterFilter = 0;
 
         for (int i = 0; i < size; i++) {
-            if (elementMeetsCondition(condition, nextElement)) {
+            if (elementMeetsCondition(criteria, nextElement)) {
                 elements[numberOfElementsAfterFilter] = nextElement.value;
                 numberOfElementsAfterFilter++;
             }
@@ -101,53 +143,12 @@ public class CustomList {
         return filteredElements;
     }
 
-    public void add(int number) {
-        if (firstElement == null) {
-            firstElement = new Element(number);
-        } else {
-            getLastElement().setNextElement(new Element(number));
-        }
-        size++;
-    }
-
-    public void addAll(Integer[] elements) {
-        for (int i = 0; i < elements.length; i++) {
-            add(elements[i]);
-        }
-    }
-
-    public void addAll(List<Integer> elements) {
-        for (int i = 0; i < elements.size(); i++) {
-            add(elements.get(i));
-        }
-    }
-
-    public void addAll(int... elements) {
-        for (int element : elements) {
-            add(element);
-        }
-    }
-
     public int size() {
         return size;
     }
 
     private static boolean elementMeetsCondition(Predicate<Integer> condition, Element nextElement) {
         return condition.test(nextElement.value);
-    }
-
-    private Element getLastElement() {
-        Element lastElement = firstElement;
-
-        while (lastElement.hasNext()) {
-            lastElement = lastElement.nextElement;
-        }
-
-        return lastElement;
-    }
-
-    private boolean sizeIsZero(){
-        return size == 0;
     }
 
     private static class Element {
@@ -172,4 +173,3 @@ public class CustomList {
     }
 
 }
-

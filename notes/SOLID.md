@@ -14,7 +14,7 @@ Classes should be open for extension but closed for modification. (don't change 
 If class A is a subtype of class B, we should be able to replace B with A without disrupting the behavior of our program.
 
 #### 4. I - Interface segregation ####
-Larger interfaces should be split into smaller ones. By doing so we can ensure that implementing classes only need 
+Larger interfaces should be split into smaller ones. By doing so we can ensure that implementing classes only need
 to be concerned about the method that are of interest to them.  
 Exeample: interface contains area and value methods, but circle or rectangle can't have value.
 # ![img.png](img.png) --------------> ![img_1.png](img_1.png)
@@ -33,7 +33,7 @@ The principle of dependency inversion refers to the decoupling of software modul
 ### WowCharacter ###
 1. Single responsibility - oddzielenie durationTime od WowCharacter, poza tym wyglada ok
 2. Open for Extensions - wyglada ok
-3. Liskov Substitution - zamiana obiektu frost na WowCharacter uniemozliwia uzycie metody frostRotationSummary - 
+3. Liskov Substitution - zamiana obiektu frost na WowCharacter uniemozliwia uzycie metody frostRotationSummary -
    przeniesienie do interfejsu
 4. Interface segregation - przeniesienie metody abstrakcyjnej .rotation() do interfejsu
 5. Dependency inversion - ??
@@ -43,7 +43,7 @@ The principle of dependency inversion refers to the decoupling of software modul
 2. Open for Extensions - no chyba tak
 3. Liskov Substitution - --
 4. Interface segregation - --
-5. Dependency inversion  - 
+5. Dependency inversion  -
 
 ### BinaryTree ###
 1. Single responsibility - ta sama klasa czyta i dodaje - dodanie klasy TreeReader
