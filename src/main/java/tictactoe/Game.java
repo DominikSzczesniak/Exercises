@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
     private int xWon;
     private int oWon;
     final private Board gameBoard = new Board();
@@ -54,17 +54,6 @@ public class Game {
         }
     }
 
-    private int getIndex() {
-        int index = scan.nextInt();
-        if (index < 0 || index > 8) {
-            do {
-                System.out.println("Position out of bounds, choose number between 0-8");
-                index = scan.nextInt();
-            } while (index < 0 || index > 8);
-        }
-        return index;
-    }
-
     private void placeXOnBoard(final int index) {
         switch (index) {
             case 0 -> gameBoard.board[0][0] = "X";
@@ -78,7 +67,6 @@ public class Game {
             case 8 -> gameBoard.board[2][2] = "X";
         }
     }
-
 
     private void placeOOnBoard(final int index) {
         switch (index) {
@@ -104,6 +92,17 @@ public class Game {
         gameBoard.board[2][0] = "6";
         gameBoard.board[2][1] = "7";
         gameBoard.board[2][2] = "8";
+    }
+
+    private int getIndex() {
+        int index = scan.nextInt();
+        if (index < 0 || index > 8) {
+            do {
+                System.out.println("Position out of bounds, choose number between 0-8");
+                index = scan.nextInt();
+            } while (index < 0 || index > 8);
+        }
+        return index;
     }
 
     private int getxWon() {
