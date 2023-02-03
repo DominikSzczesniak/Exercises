@@ -20,3 +20,18 @@ Exeample: interface contains area and value methods, but circle or rectangle can
 
 #### 5. D - Dependency inversion ####
 The principle of dependency inversion refers to the decoupling of software modules. This way, instead of high-level modules depending on low-level modules, both will depend on abstractions.
+
+### Custom list ###
+1. Single responsibility - Klasa wykonuje wiele czynności, dodaje, filtruje, usuwa i wyczytuje na różne sposoby.
+2. Open for extensions - Wypadałoby podzielić za pomocą innych klas na queue, dequeue.
+3. Liskov substitution - ??
+4. Interface Segregation - Dodanie interfejsów na metody remove, getAllInOrder - mogą znajdować się w jednym
+   interfejsie (chyba)
+5. Dependency inversion - ??
+
+### WowCharacter ###
+1. Single responsibility - oddzielenie durationTime od WowCharacter, poza tym wyglada ok
+2. Open for Extensions - wyglada ok
+3. Liskov Substitution - zamiana obiektu frost na WowCharacter uniemozliwia uzycie metody frostRotationSummary
+4. Interface segregation - przeniesienie metody abstrakcyjnej do interfejsu
+5. Dependency inversion - ??
