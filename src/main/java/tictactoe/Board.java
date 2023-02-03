@@ -1,12 +1,7 @@
 package tictactoe;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
-
 public class Board {
-    String[][] board = {{"0", "1", "2"}, {"3", "4", "5"}, {"6", "7", "8"}};
-    Scanner scan = new Scanner(System.in);
+    final String[][] board = {{"0", "1", "2"}, {"3", "4", "5"}, {"6", "7", "8"}};
 
 //    -------------------------------------------------------------         -------------------------------
 //    |                   |                   |                   |         |         |         |         |
@@ -22,84 +17,7 @@ public class Board {
 //    |                   |                   |                   |         |         |         |         |
 //    -------------------------------------------------------------         -------------------------------
 
-
-    public void playTheGame() {
-        printBoard();
-
-        while (!playerWon()) {
-            System.out.println("◯ turn");
-            int position = getIndex();
-            if (spotIsTaken(position)) {
-                do {
-                    System.out.println("Spot is already taken, choose different position.");
-                    position = getIndex();
-                } while (spotIsTaken(position));
-            }
-            placeOOnBoard(position);
-            printBoard();
-            if (playerWon()) {
-                return;
-            }
-
-            System.out.println("X turn");
-            position = getIndex();
-            if (spotIsTaken(position)) {
-                do {
-                    System.out.println("Spot is already taken, choose different position.");
-                    position = getIndex();
-                } while (spotIsTaken(position));
-            }
-            placeXOnBoard(position);
-            printBoard();
-            if (playerWon()) {
-                return;
-            }
-        }
-
-    }
-
-
-    private int getIndex() {
-        int index = scan.nextInt();
-        if (index < 0 || index > 8) {
-            do {
-                System.out.println("Position out of bounds, choose number between 0-8");
-                index = scan.nextInt();
-            } while (index < 0 || index > 8);
-        }
-            return index;
-    }
-
-    private void placeXOnBoard(int index) {
-        switch (index) {
-            case 0 -> board[0][0] = "X";
-            case 1 -> board[0][1] = "X";
-            case 2 -> board[0][2] = "X";
-            case 3 -> board[1][0] = "X";
-            case 4 -> board[1][1] = "X";
-            case 5 -> board[1][2] = "X";
-            case 6 -> board[2][0] = "X";
-            case 7 -> board[2][1] = "X";
-            case 8 -> board[2][2] = "X";
-        }
-    }
-
-
-    private void placeOOnBoard(int index) {
-        switch (index) {
-            case 0 -> board[0][0] = "◯";
-            case 1 -> board[0][1] = "◯";
-            case 2 -> board[0][2] = "◯";
-            case 3 -> board[1][0] = "◯";
-            case 4 -> board[1][1] = "◯";
-            case 5 -> board[1][2] = "◯";
-            case 6 -> board[2][0] = "◯";
-            case 7 -> board[2][1] = "◯";
-            case 8 -> board[2][2] = "◯";
-        }
-    }
-
-    private boolean spotIsTaken(int index) {  // TO NAPRAWIC
+    boolean spotIsTaken(final int index) {
         String line;
         switch (index) {
             case 0 -> {
@@ -151,7 +69,7 @@ public class Board {
         return false;
     }
 
-    public void printBoard() {
+    void printBoard() {
         System.out.println("" +
                 "-------------------------------\n" +
                 "|         |         |         |\n" +
@@ -168,15 +86,7 @@ public class Board {
                 "-------------------------------");
     }
 
-    private void announceWinner() {
-        if (playerWon()) {
-
-        }
-
-
-    }
-
-    private boolean playerWon() {
+    boolean playerWon() {
         for (int i = 0; i < 8; i++) {
             String line = " ";
             switch (i) {
@@ -201,17 +111,4 @@ public class Board {
         return false;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Board board1 = (Board) o;
-        return Arrays.equals(board, board1.board);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(board);
-    }
 }
