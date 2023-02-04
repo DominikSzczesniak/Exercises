@@ -7,6 +7,7 @@ Class should only have one responsibility - should have only one reason to chang
 3. Organization - easier to search thanks to the classes being small.
 
 #### 2. O - Open for Extensions ####
+**nie rozumiem czemu mialoby nie byc kiedykolwiek**  
 Classes should be open for extension but closed for modification. (don't change code in the class, extend it to another)
 
 #### 3. L - Liskov Substitution _(most complex)_ ####
@@ -24,7 +25,7 @@ The principle of dependency inversion refers to the decoupling of software modul
 ### Custom list ###
 1. Single responsibility - Klasa wykonuje wiele czynności, dodaje, filtruje, usuwa i wyczytuje na różne sposoby.
 2. Open for extensions - Wypadałoby podzielić za pomocą innych klas na queue, dequeue.
-3. Liskov substitution - ??
+3. Liskov substitution - zalezy od zaimplementowania czwartego punktu
 4. Interface Segregation - Dodanie interfejsów na metody remove, getAllInOrder - mogą znajdować się w jednym
    interfejsie (chyba)
 5. Dependency inversion - ??
@@ -35,3 +36,17 @@ The principle of dependency inversion refers to the decoupling of software modul
 3. Liskov Substitution - zamiana obiektu frost na WowCharacter uniemozliwia uzycie metody frostRotationSummary
 4. Interface segregation - przeniesienie metody abstrakcyjnej do interfejsu
 5. Dependency inversion - ??
+
+### TicTacToe ###
+1. Single responsibility - skan indeksu do oddzielnej klasy??
+2. Open for Extensions - no chyba tak
+3. Liskov Substitution - --
+4. Interface segregation - --
+5. Dependency inversion  - 
+
+### BinaryTree ###
+1. Single responsibility - ta sama klasa czyta i dodaje - dodanie klasy TreeReader
+2. Open for Extensions - no chyba tak
+3. Liskov Substitution - --
+4. Interface segregation - --
+5. Dependency inversion - --
