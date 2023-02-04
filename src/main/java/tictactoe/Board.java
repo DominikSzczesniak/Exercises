@@ -109,5 +109,19 @@ public class Board {
         }
         return false;
     }
+
+    boolean isDraw() {
+        int spotsTaken = 0;
+        for (int i = 0; i < 9; i++) {
+            if (spotIsTaken(i)) {
+                spotsTaken++;
+            }
+        }
+        if (spotsTaken == 9) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 

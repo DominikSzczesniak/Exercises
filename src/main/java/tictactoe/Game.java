@@ -26,6 +26,9 @@ public class Game {
             if (gameBoard.gameIsOver()) {
                 oWon++;
                 break;
+            } else if ((gameBoard.isDraw())) {
+                System.out.println("It's a draw");
+                break;
             }
 
             System.out.println("X turn");
@@ -40,6 +43,9 @@ public class Game {
             gameBoard.printBoard();
             if (gameBoard.gameIsOver()) {
                 xWon++;
+                break;
+            } else if ((gameBoard.isDraw())) {
+                System.out.println("It's a draw");
                 break;
             }
         }
