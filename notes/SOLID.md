@@ -33,8 +33,9 @@ The principle of dependency inversion refers to the decoupling of software modul
 ### WowCharacter ###
 1. Single responsibility - oddzielenie durationTime od WowCharacter, poza tym wyglada ok
 2. Open for Extensions - wyglada ok
-3. Liskov Substitution - zamiana obiektu frost na WowCharacter uniemozliwia uzycie metody frostRotationSummary
-4. Interface segregation - przeniesienie metody abstrakcyjnej do interfejsu
+3. Liskov Substitution - zamiana obiektu frost na WowCharacter uniemozliwia uzycie metody frostRotationSummary - 
+   przeniesienie do interfejsu
+4. Interface segregation - przeniesienie metody abstrakcyjnej .rotation() do interfejsu
 5. Dependency inversion - ??
 
 ### TicTacToe ###

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class MathematicalOperation {
 
-    public int action(String numbers) {
+    public int action(final String numbers) {
         List<String> listOfStrings = new ArrayList<>(List.of(numbers.split("[,;.]")));
         String lastElement = listOfStrings.get(listOfStrings.size() - 1);
         listOfStrings.remove(listOfStrings.size() - 1);
