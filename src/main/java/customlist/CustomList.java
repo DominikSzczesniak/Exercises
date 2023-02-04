@@ -29,19 +29,19 @@ public class CustomList {
         return Optional.of(lastElement);
     }
 
-    public void addAll(Integer[] elements) {
+    public void addAll(final Integer[] elements) {
         for (Integer element : elements) {
             add(element);
         }
     }
 
-    public void addAll(List<Integer> elements) {
+    public void addAll(final List<Integer> elements) {
         for (Integer element : elements) {
             add(element);
         }
     }
 
-    public void addAll(int... elements) {
+    public void addAll(final int... elements) {
         for (int element : elements) {
             add(element);
         }
@@ -155,7 +155,7 @@ public class CustomList {
         int value;
         Element nextElement;
 
-        public Element(int value) {
+        public Element(final int value) {
             this.value = value;
         }
 
