@@ -12,7 +12,7 @@ public class Game {
     public void playTheGame() {
         gameBoard.printBoard();
 
-        while (!gameBoard.playerWon()) {
+        while (!gameBoard.gameIsOver()) {
             System.out.println("◯ turn");
             int position = getIndex();
             if (gameBoard.spotIsTaken(position)) {
@@ -23,7 +23,7 @@ public class Game {
             }
             placeOOnBoard(position);
             gameBoard.printBoard();
-            if (gameBoard.playerWon()) {
+            if (gameBoard.gameIsOver()) {
                 oWon++;
                 break;
             }
@@ -38,7 +38,7 @@ public class Game {
             }
             placeXOnBoard(position);
             gameBoard.printBoard();
-            if (gameBoard.playerWon()) {
+            if (gameBoard.gameIsOver()) {
                 xWon++;
                 break;
             }
@@ -66,6 +66,7 @@ public class Game {
             case 7 -> gameBoard.board[2][1] = "X";
             case 8 -> gameBoard.board[2][2] = "X";
         }
+
     }
 
     private void placeOOnBoard(final int index) {
@@ -112,4 +113,5 @@ public class Game {
     private int getoWon() {
         return oWon;
     }
+
 }

@@ -86,7 +86,7 @@ public class Board {
         return false;
     }
 
-    boolean playerWon() {
+    boolean gameIsOver() {
         for (int i = 0; i < 8; i++) {
             String line = " ";
             switch (i) {
@@ -98,7 +98,6 @@ public class Board {
                 case 5 -> line = board[0][2] + board[1][2] + board[2][2];
                 case 6 -> line = board[0][0] + board[1][1] + board[2][2];
                 case 7 -> line = board[0][2] + board[1][1] + board[2][0];
-
             }
             if ("XXX".equals(line)) {
                 System.out.println("Player X has won the game");
@@ -110,5 +109,5 @@ public class Board {
         }
         return false;
     }
-
 }
+
