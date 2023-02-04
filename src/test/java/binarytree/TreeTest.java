@@ -19,6 +19,22 @@ class TreeTest {
         tut.add(4);
         tut.add(2);
         tut.add(1);
+
+        // then
+        assertThat(tut.read()).hasSize(8);
+    }
+
+    @Test
+    void should_add_negative_value_nodes() {
+        // when
+        tut.add(8);
+        tut.add(6);
+        tut.add(9);
+        tut.add(5);
+        tut.add(3);
+        tut.add(4);
+        tut.add(2);
+        tut.add(1);
         tut.add(-7);
 
         // then

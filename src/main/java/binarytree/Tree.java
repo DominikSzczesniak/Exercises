@@ -45,7 +45,7 @@ public class Tree {
         return result;
     }
 
-    private void readNode(Node node, List<Integer> result) {
+    private void readNode(final Node node, List<Integer> result) {
         result.add(node.getValue());
         if (node.hasNextLeft()) {
             readNode(node.getLeft(), result);
