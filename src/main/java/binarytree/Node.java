@@ -2,7 +2,7 @@ package binarytree;
 
 import static java.util.Objects.requireNonNull;
 
-public class Node {
+class Node {
 
     private final int value;
     private Node left;

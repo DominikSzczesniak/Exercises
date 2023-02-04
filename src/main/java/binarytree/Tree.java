@@ -35,7 +35,6 @@ public class Tree {
         }
     }
 
-
     public List<Integer> read() {
         List<Integer> result = new ArrayList<>();
         if (root == null) {
