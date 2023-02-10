@@ -3,8 +3,7 @@ package fizzbuzz;
 public class FizzBuzz {
 
     public void print(int number) {
-        System.out.print(number);
-        System.out.println(" - " + execute(number));
+        System.out.println(number + " - " + execute(number));
     }
 
 
