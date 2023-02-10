@@ -5,15 +5,23 @@ import java.util.Scanner;
 public class Game {
 
     private final Scanner scan = new Scanner(System.in);
-    private int xWon;
-    private int oWon;
+    private int secondPlayerWon;
+    private int firstPlayerWon;
     final private Board gameBoard = new Board();
+
+    public void assignNames() {
+        gameBoard.players.setNames();
+    }
+
+    public void assignSymbols() {
+        gameBoard.players.setSymbols();
+    }
 
     public void playTheGame() {
         gameBoard.printBoard();
 
         while (!gameBoard.gameIsOver()) {
-            System.out.println("◯ turn");
+            System.out.println(gameBoard.players.getNameOne() + " turn");
             int position = getIndex();
             if (gameBoard.spotIsTaken(position)) {
                 do {
@@ -24,14 +32,14 @@ public class Game {
             placeOOnBoard(position);
             gameBoard.printBoard();
             if (gameBoard.gameIsOver()) {
-                oWon++;
+                firstPlayerWon++;
                 break;
             } else if ((gameBoard.isDraw())) {
                 System.out.println("It's a draw");
                 break;
             }
 
-            System.out.println("X turn");
+            System.out.println(gameBoard.players.getNameTwo() + " turn");
             position = getIndex();
             if (gameBoard.spotIsTaken(position)) {
                 do {
@@ -42,14 +50,14 @@ public class Game {
             placeXOnBoard(position);
             gameBoard.printBoard();
             if (gameBoard.gameIsOver()) {
-                xWon++;
+                secondPlayerWon++;
                 break;
             } else if ((gameBoard.isDraw())) {
                 System.out.println("It's a draw");
                 break;
             }
         }
-        System.out.println("The results are: ◯ - " + getoWon() + ", X - " + getxWon());
+        System.out.println("The results are: " + gameBoard.players.getNameOne() + " - " + getFirstPlayerWon() + ", " + gameBoard.players.getNameTwo() + " - " + getSecondPlayerWon());
         System.out.println("Would you like to play again? (1 - yes, 2 - no)");
         int play = scan.nextInt();
         if (play == 1) {
@@ -62,30 +70,30 @@ public class Game {
 
     private void placeXOnBoard(final int index) {
         switch (index) {
-            case 0 -> gameBoard.board[0][0] = "X";
-            case 1 -> gameBoard.board[0][1] = "X";
-            case 2 -> gameBoard.board[0][2] = "X";
-            case 3 -> gameBoard.board[1][0] = "X";
-            case 4 -> gameBoard.board[1][1] = "X";
-            case 5 -> gameBoard.board[1][2] = "X";
-            case 6 -> gameBoard.board[2][0] = "X";
-            case 7 -> gameBoard.board[2][1] = "X";
-            case 8 -> gameBoard.board[2][2] = "X";
+            case 0 -> gameBoard.board[0][0] = gameBoard.players.getSymbolTwo();
+            case 1 -> gameBoard.board[0][1] = gameBoard.players.getSymbolTwo();
+            case 2 -> gameBoard.board[0][2] = gameBoard.players.getSymbolTwo();
+            case 3 -> gameBoard.board[1][0] = gameBoard.players.getSymbolTwo();
+            case 4 -> gameBoard.board[1][1] = gameBoard.players.getSymbolTwo();
+            case 5 -> gameBoard.board[1][2] = gameBoard.players.getSymbolTwo();
+            case 6 -> gameBoard.board[2][0] = gameBoard.players.getSymbolTwo();
+            case 7 -> gameBoard.board[2][1] = gameBoard.players.getSymbolTwo();
+            case 8 -> gameBoard.board[2][2] = gameBoard.players.getSymbolTwo();
         }
 
     }
 
     private void placeOOnBoard(final int index) {
         switch (index) {
-            case 0 -> gameBoard.board[0][0] = "◯";
-            case 1 -> gameBoard.board[0][1] = "◯";
-            case 2 -> gameBoard.board[0][2] = "◯";
-            case 3 -> gameBoard.board[1][0] = "◯";
-            case 4 -> gameBoard.board[1][1] = "◯";
-            case 5 -> gameBoard.board[1][2] = "◯";
-            case 6 -> gameBoard.board[2][0] = "◯";
-            case 7 -> gameBoard.board[2][1] = "◯";
-            case 8 -> gameBoard.board[2][2] = "◯";
+            case 0 -> gameBoard.board[0][0] = gameBoard.players.getSymbolOne();
+            case 1 -> gameBoard.board[0][1] = gameBoard.players.getSymbolOne();
+            case 2 -> gameBoard.board[0][2] = gameBoard.players.getSymbolOne();
+            case 3 -> gameBoard.board[1][0] = gameBoard.players.getSymbolOne();
+            case 4 -> gameBoard.board[1][1] = gameBoard.players.getSymbolOne();
+            case 5 -> gameBoard.board[1][2] = gameBoard.players.getSymbolOne();
+            case 6 -> gameBoard.board[2][0] = gameBoard.players.getSymbolOne();
+            case 7 -> gameBoard.board[2][1] = gameBoard.players.getSymbolOne();
+            case 8 -> gameBoard.board[2][2] = gameBoard.players.getSymbolOne();
         }
     }
 
@@ -112,12 +120,12 @@ public class Game {
         return index;
     }
 
-    private int getxWon() {
-        return xWon;
+    private int getSecondPlayerWon() {
+        return secondPlayerWon;
     }
 
-    private int getoWon() {
-        return oWon;
+    private int getFirstPlayerWon() {
+        return firstPlayerWon;
     }
 
 }

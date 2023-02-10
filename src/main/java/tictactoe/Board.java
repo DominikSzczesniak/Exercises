@@ -3,6 +3,8 @@ package tictactoe;
 public class Board {
     final String[][] board = {{"0", "1", "2"}, {"3", "4", "5"}, {"6", "7", "8"}};
 
+    Players players = new Players();
+
 //    -------------------------------------------------------------         -------------------------------
 //    |                   |                   |                   |         |         |         |         |
 //    |    board[0][0]    |    board[0][1]    |    board[0][2]    |         |    0    |    1    |    2    |
@@ -39,47 +41,47 @@ public class Board {
         switch (index) {
             case 0 -> {
                 line = board[0][0];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 1 -> {
                 line = board[0][1];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 2 -> {
                 line = board[0][2];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 3 -> {
                 line = board[1][0];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 4 -> {
                 line = board[1][1];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 5 -> {
                 line = board[1][2];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 6 -> {
                 line = board[2][0];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 7 -> {
                 line = board[2][1];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
             case 8 -> {
                 line = board[2][2];
-                if ("X".equals(line) || "◯".equals(line))
+                if (players.getSymbolTwo().equals(line) || players.getSymbolOne().equals(line))
                     return true;
             }
         }
@@ -99,11 +101,11 @@ public class Board {
                 case 6 -> line = board[0][0] + board[1][1] + board[2][2];
                 case 7 -> line = board[0][2] + board[1][1] + board[2][0];
             }
-            if ("XXX".equals(line)) {
-                System.out.println("Player X has won the game");
+            if ((players.getSymbolTwo() + players.getSymbolTwo() + players.getSymbolTwo()).equals(line)) {
+                System.out.println(players.getNameTwo() + " has won the game");
                 return true;
-            } else if ("◯◯◯".equals(line)) {
-                System.out.println("Player ◯ has won the game");
+            } else if ((players.getSymbolOne() + players.getSymbolOne() + players.getSymbolOne()).equals(line)) {
+                System.out.println(players.getNameOne() + " has won the game");
                 return true;
             }
         }
